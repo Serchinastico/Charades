@@ -2,31 +2,21 @@
 #
 .DS_Store
 
-# node.js
-#
-node_modules/
-npm-debug.log
-
-# gradle
-#
-build/
-/*/build/
-.gradle/
-gradle/
-
 # AndroidStudio
 #
 .idea/
-*.iml
-
-# Local configuration file (sdk path, etc)
-#
-local.properties
-
-# Eclipse
-#
-proguard/
 
 # Log Files
 #
 *.log
+*.class
+
+# Build
+project/target
+target/
+/project/project
+
+# SBT
+project/.sbtserver
+project/.sbtserver.lock
+project/build.properties

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2015 Sergio Gutiérrez Mota
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:gravity="center">
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/MainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/title_margin_top"
+        android:text="@string/main_title" />
+
+    <LinearLayout
+        android:id="@+id/options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+      <include layout="@layout/main_horizontal_divider" />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/option_row_height">
+
+        <TextView
+            style="@style/MainOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/option_margin_left"
+            android:layout_marginStart="@dimen/option_margin_left"
+            android:text="@string/new_option" />
+
+        <View
+            android:layout_width="@dimen/option_side_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/new_option_side_color" />
+      </RelativeLayout>
+
+      <include layout="@layout/main_horizontal_divider" />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/option_row_height">
+
+        <TextView
+            style="@style/MainOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/option_margin_left"
+            android:layout_marginStart="@dimen/option_margin_left"
+            android:text="@string/settings_option" />
+
+        <View
+            android:layout_width="@dimen/option_side_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/settings_option_side_color" />
+      </RelativeLayout>
+
+      <include layout="@layout/main_horizontal_divider" />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/option_row_height">
+
+        <TextView
+            style="@style/MainOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/option_margin_left"
+            android:layout_marginStart="@dimen/option_margin_left"
+            android:text="@string/stats_option" />
+
+        <View
+            android:layout_width="@dimen/option_side_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/stats_option_side_color" />
+      </RelativeLayout>
+
+      <include layout="@layout/main_horizontal_divider" />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/option_row_height">
+
+        <TextView
+            style="@style/MainOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/option_margin_left"
+            android:layout_marginStart="@dimen/option_margin_left"
+            android:text="@string/exit_option" />
+
+        <View
+            android:layout_width="@dimen/option_side_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/exit_option_side_color" />
+      </RelativeLayout>
+
+    </LinearLayout>
+
+  </RelativeLayout>
+
+  <include layout="@layout/main_vertical_divider" />
+
+</FrameLayout>
