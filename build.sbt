@@ -38,8 +38,7 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 scalacOptions += "-target:jvm-1.7"
 
-libraryDependencies ++= Seq(
-  aar("uk.co.chrisjenx" % "calligraphy" % "2.1.0")
-)
+libraryDependencies += aar("uk.co.chrisjenx" % "calligraphy" % "2.1.0")
+libraryDependencies += "com.softwaremill.macwire" %% "macros" % "2.1.0" % "provided"
 
 fork in run := true

@@ -180,7 +180,11 @@
 # view AndroidManifest.xml #generated:16
 -keep class android.test.InstrumentationTestRunner { <init>(...); }
 
-# view res/layout/main.xml #generated:41
+# view AndroidManifest.xml #generated:6
+-keep class com.serchinastico.charades.MainApplication { <init>(...); }
+
+# view res/layout/main_horizontal_divider.xml #generated:25
+# view res/layout/main_vertical_divider.xml #generated:25
 -keep class com.serchinastico.charades.base.ui.view.LineDivider { <init>(...); }
 
 # view AndroidManifest.xml #generated:7
