@@ -1,12 +1,6 @@
-package com.serchinastico.charades.newgame.ui.activity
+package com.serchinastico.charades.newgame
 
-import android.os.Bundle
-import com.serchinastico.charades.R
-import com.serchinastico.charades.base.ui.activity.BaseActivity
-import com.serchinastico.charades.base.ui.presenter.BasePresenter
-import com.serchinastico.charades.newgame.GetPlayers.Players
-import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter
-import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
+import com.serchinastico.charades.newgame.domain.model.Player
 
 /**
  * The MIT License (MIT)
@@ -32,16 +26,6 @@ import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
  * THE SOFTWARE.
  */
 
-class NewGameActivity extends BaseActivity with View {
-
-  override var presenter: BasePresenter = new NewGamePresenter(this)
-
-  override def onCreate(bundle: Bundle) {
-    super.onCreate(bundle)
-    setContentView(R.layout.new_game)
-  }
-
-  override def showPlayers(players: Players): Unit = {
-
-  }
+package object GetPlayers {
+  type Players = Seq[Player]
 }

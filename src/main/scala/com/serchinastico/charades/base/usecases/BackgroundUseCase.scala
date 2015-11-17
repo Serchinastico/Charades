@@ -1,12 +1,8 @@
-package com.serchinastico.charades.newgame.ui.activity
+package com.serchinastico.charades.base.usecases
 
-import android.os.Bundle
-import com.serchinastico.charades.R
-import com.serchinastico.charades.base.ui.activity.BaseActivity
-import com.serchinastico.charades.base.ui.presenter.BasePresenter
-import com.serchinastico.charades.newgame.GetPlayers.Players
-import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter
-import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
+import java.util.concurrent.{Executors, ExecutorService}
+
+import android.os.{Looper, Handler}
 
 /**
  * The MIT License (MIT)
@@ -32,16 +28,13 @@ import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
  * THE SOFTWARE.
  */
 
-class NewGameActivity extends BaseActivity with View {
+/**
+ * Base class for use cases that run in background and call callback methods in the
+ * main thread.
+ */
+abstract class BackgroundUseCase[R] extends UseCase[R] {
 
-  override var presenter: BasePresenter = new NewGamePresenter(this)
+  override val mainThreadHandler: Handler = new Handler(Looper.getMainLooper)
 
-  override def onCreate(bundle: Bundle) {
-    super.onCreate(bundle)
-    setContentView(R.layout.new_game)
-  }
-
-  override def showPlayers(players: Players): Unit = {
-
-  }
+  override val executor: ExecutorService = Executors.newCachedThreadPool()
 }

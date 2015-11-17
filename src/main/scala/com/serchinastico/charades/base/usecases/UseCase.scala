@@ -1,6 +1,8 @@
 package com.serchinastico.charades.base.usecases
 
-import java.util.concurrent.{ExecutorService, Executors}
+import java.util.concurrent.ExecutorService
+
+import android.os.Handler
 
 /**
  * The MIT License (MIT)
@@ -28,28 +30,49 @@ import java.util.concurrent.{ExecutorService, Executors}
 
 /**
  * Trait representing an application use case.
- * It will handle calls from the main thread, execute the use case itself in another thread and return its results back
- * on the main thread.
+ * It will handle calls from the main thread, execute the use case itself in another thread and
+ * return its results back on the main thread.
  */
 trait UseCase[R] {
 
-  private def executor: ExecutorService = Executors.newCachedThreadPool()
-
-  protected def successCallback(result: R): Unit = {}
-
-  protected def errorCallback(error: Exception): Unit = {}
-
-  protected def execute(runnable: () => R): Unit = {
+  def execute(): Unit = {
     executor.submit(new Runnable {
       override def run(): Unit = {
         try {
           val result: R = runnable()
-          successCallback(result)
+          notifySuccess(result)
         } catch {
-          case e: Exception => errorCallback(e)
+          case e: Exception => notifyError(e)
         }
       }
     })
   }
 
+  protected def mainThreadHandler: Handler
+  protected def executor: ExecutorService
+  protected def onSuccess: R => Unit = UseCase.identityOnSuccess
+  protected def onError: Exception => Unit = UseCase.identityOnError
+  protected def runnable(): R
+
+  private def notifySuccess(result: R): Unit = {
+    mainThreadHandler.post(new Runnable() {
+      override def run(): Unit = {
+        onSuccess(result)
+      }
+    })
+  }
+
+  private def notifyError(error: Exception): Unit = {
+    mainThreadHandler.post(new Runnable() {
+      override def run(): Unit = {
+        onError(error)
+      }
+    })
+  }
+}
+
+object UseCase {
+  def identityOnSuccess[R](result: R): Unit = {}
+
+  def identityOnError(error: Exception): Unit = {}
 }

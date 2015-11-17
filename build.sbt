@@ -1,7 +1,7 @@
 android.Plugin.androidBuild
 
 // Specifying the Android target Sdk version
-platformTarget in Android := "android-22"
+platformTarget in Android := "android-23"
 
 // Application Name
 name := """Charades"""
@@ -20,10 +20,12 @@ resolvers ++= Seq(Resolver.mavenLocal,
   Resolver.typesafeIvyRepo("snapshots"),
   Resolver.sonatypeRepo("releases"),
   Resolver.sonatypeRepo("snapshots"),
-  Resolver.defaultLocal)
+  Resolver.defaultLocal,
+  Resolver.jcenterRepo)
 
 // Override the run task with the android:run
 run <<= run in Android
+
 compile <<= compile in Android
 
 proguardScala in Android := true
@@ -39,6 +41,9 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 scalacOptions += "-target:jvm-1.7"
 
 libraryDependencies += aar("uk.co.chrisjenx" % "calligraphy" % "2.1.0")
+
 libraryDependencies += "com.softwaremill.macwire" %% "macros" % "2.1.0" % "provided"
+
+libraryDependencies += "io.realm" % "realm-android" % "0.84.2"
 
 fork in run := true
