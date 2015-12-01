@@ -46,4 +46,6 @@ libraryDependencies += "com.softwaremill.macwire" %% "macros" % "2.1.0" % "provi
 
 libraryDependencies += "io.realm" % "realm-android" % "0.84.2"
 
+libraryDependencies += "com.android.support" % "recyclerview-v7" % "23.0.1"
+
 fork in run := true

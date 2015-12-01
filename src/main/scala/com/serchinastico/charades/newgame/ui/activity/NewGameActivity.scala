@@ -16,12 +16,12 @@
 
 package com.serchinastico.charades.newgame.ui.activity
 
-import android.content.{Context, Intent}
+import android.content.{Intent, Context}
 import android.os.Bundle
-import android.widget.TextView
+import android.widget.EditText
 import com.serchinastico.charades.base.ui.activity.BaseActivity
-import com.serchinastico.charades.newgame.domain.model.Player
 import com.serchinastico.charades.newgame.GetPlayers.Players
+import com.serchinastico.charades.newgame.domain.model.Player
 import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter
 import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
 import com.serchinastico.charades.{R, TR, TypedFindView}
@@ -29,7 +29,9 @@ import com.serchinastico.charades.{R, TR, TypedFindView}
 class NewGameActivity extends BaseActivity with View with TypedFindView {
 
   override val presenter = new NewGamePresenter(this)
-  lazy val playersView = findView[TextView](TR.tv_players)
+  lazy val numberOfRoundsView = findView[EditText](TR.et_number_of_rounds)
+  lazy val roundTimeView = findView[EditText](TR.et_round_time)
+  lazy val numberOfTeamsView = findView[EditText](TR.et_number_of_teams)
 
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
@@ -37,11 +39,6 @@ class NewGameActivity extends BaseActivity with View with TypedFindView {
   }
 
   override def showPlayers(players: Players): Unit = {
-    val playerNames: String = players.foldLeft("")((acc: String, player: Player) => {
-      acc + " " + player.fullName
-    })
-
-    playersView.setText(playerNames)
   }
 }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.serchinastico.charades.newgame.usecases
+package com.serchinastico.charades.newgame.domain.usecases
 
 import com.serchinastico.charades.base.usecases.BackgroundUseCase
 import com.serchinastico.charades.newgame.GetPlayers.Players
@@ -24,7 +24,9 @@ class GetPlayers(override val onSuccess: Option[Players => Unit] = None,
                  override val onFailure: Option[Exception => Unit] = None) extends BackgroundUseCase[Unit, Players] {
 
   override protected def runnable(input: Unit): Players = {
-    Array(new Player("https://www.google.es", "Sergio"))
+    Array(new Player("https://www.google.es", "Sergio"),
+      new Player("https://www.google.es", "Víctor"),
+      new Player("https://www.google.es", "Tolfo"))
   }
 }
 
@@ -44,8 +46,8 @@ object GetPlayers {
       this
     }
 
-    def build(): GetPlayers = {
-      new GetPlayers(onSuccess, onFailure)
+    def execute(): Unit = {
+      new GetPlayers(onSuccess, onFailure).execute()
     }
   }
 

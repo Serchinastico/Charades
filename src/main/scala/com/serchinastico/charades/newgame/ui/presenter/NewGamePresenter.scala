@@ -19,14 +19,14 @@ package com.serchinastico.charades.newgame.ui.presenter
 import com.serchinastico.charades.base.ui.presenter.BasePresenter
 import com.serchinastico.charades.newgame.GetPlayers._
 import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
-import com.serchinastico.charades.newgame.usecases.GetPlayers
+import com.serchinastico.charades.newgame.domain.usecases.GetPlayers
 
 class NewGamePresenter(override val view: View) extends BasePresenter {
   override def update(): Unit = {
     super.update()
     new GetPlayers.Builder().withOnSuccess((players: Players) => {
       view.showPlayers(players)
-    }).build().execute()
+    }).execute()
   }
 }
 

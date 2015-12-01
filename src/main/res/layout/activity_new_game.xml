@@ -14,15 +14,93 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    >
 
   <TextView
-      android:id="@+id/tv_players"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:id="@+id/title"
+      style="@style/MainTitle"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/new_game_title_height"
+      android:gravity="center"
+      android:background="@color/new_game_title_background"
+      android:text="@string/new_game_title"
       />
 
-</LinearLayout>
+  <include
+      android:id="@+id/top_divider"
+      layout="@layout/main_horizontal_divider"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/divider_view_height"
+      android:layout_below="@id/title"
+      />
+
+  <LinearLayout
+      android:id="@+id/ll_config_fields"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/top_divider"
+      android:orientation="vertical"
+      >
+
+    <EditText
+        android:id="@+id/et_number_of_rounds"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_game_field_height"
+        android:inputType="number"
+        android:hint="@string/number_of_rounds"
+        style="@style/NewGameField"
+        />
+
+    <EditText
+        android:id="@+id/et_round_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_game_field_height"
+        android:inputType="number"
+        android:hint="@string/round_time"
+        style="@style/NewGameField"
+        />
+
+    <EditText
+        android:id="@+id/et_number_of_teams"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_game_field_height"
+        android:inputType="number"
+        android:hint="@string/number_of_teams"
+        style="@style/NewGameField"
+        android:layout_marginBottom="@dimen/new_game_field_margin_top"
+        />
+
+  </LinearLayout>
+
+  <include
+      android:id="@+id/bottom_divider"
+      layout="@layout/main_horizontal_divider"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/divider_view_height"
+      android:layout_below="@id/ll_config_fields"
+      />
+
+  <TextView
+      android:id="@+id/iv_add_player"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/new_game_add_player_button_height"
+      android:layout_alignParentBottom="true"
+      android:background="@drawable/add_player_button_background"
+      android:gravity="center"
+      android:textSize="40sp"
+      android:text="+"
+      />
+
+  <android.support.v7.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/bottom_divider"
+      android:layout_above="@id/iv_add_player"
+      />
+
+</RelativeLayout>

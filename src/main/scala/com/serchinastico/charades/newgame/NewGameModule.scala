@@ -19,6 +19,6 @@ package com.serchinastico.charades.newgame
 trait NewGameModule {
   import com.softwaremill.macwire._
 
-  import usecases._
+  import com.serchinastico.charades.newgame.domain.usecases._
 //  lazy val getPlayers = wire[GetPlayers]
 }
