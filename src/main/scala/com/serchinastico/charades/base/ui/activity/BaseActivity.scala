@@ -33,7 +33,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 trait BaseActivity extends FragmentActivity with View {
 
-  var presenter: BasePresenter
+  val presenter: BasePresenter
 
   override def attachBaseContext(newBase: Context): Unit = {
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))

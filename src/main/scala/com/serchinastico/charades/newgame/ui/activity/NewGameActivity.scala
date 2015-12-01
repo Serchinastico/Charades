@@ -1,12 +1,14 @@
 package com.serchinastico.charades.newgame.ui.activity
 
+import android.content.{Context, Intent}
 import android.os.Bundle
-import com.serchinastico.charades.R
+import android.widget.TextView
 import com.serchinastico.charades.base.ui.activity.BaseActivity
-import com.serchinastico.charades.base.ui.presenter.BasePresenter
+import com.serchinastico.charades.newgame.domain.model.Player
 import com.serchinastico.charades.newgame.GetPlayers.Players
 import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter
 import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
+import com.serchinastico.charades.{R, TR, TypedFindView}
 
 /**
  * The MIT License (MIT)
@@ -32,16 +34,28 @@ import com.serchinastico.charades.newgame.ui.presenter.NewGamePresenter.View
  * THE SOFTWARE.
  */
 
-class NewGameActivity extends BaseActivity with View {
+class NewGameActivity extends BaseActivity with View with TypedFindView {
 
-  override var presenter: BasePresenter = new NewGamePresenter(this)
+  override val presenter = new NewGamePresenter(this)
+  lazy val playersView = findView[TextView](TR.tv_players)
 
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
-    setContentView(R.layout.new_game)
+    setContentView(R.layout.activity_new_game)
   }
 
   override def showPlayers(players: Players): Unit = {
+    val playerNames: String = players.foldLeft("")((acc: String, player: Player) => {
+      acc + " " + player.fullName
+    })
 
+    playersView.setText(playerNames)
+  }
+}
+
+object NewGameActivity {
+  def open(context: Context) = {
+    val intent: Intent = new Intent(context, classOf[NewGameActivity])
+    context.startActivity(intent)
   }
 }

@@ -33,14 +33,21 @@ import android.os.Handler
  * It will handle calls from the main thread, execute the use case itself in another thread and
  * return its results back on the main thread.
  */
-trait UseCase[R] {
+trait UseCase[I, O] {
 
-  def execute(): Unit = {
+  protected def executor: ExecutorService
+  protected def responseHandler: Handler
+  protected def onSuccess: Option[O => Unit] = None
+  protected def onFailure: Option[Exception => Unit] = None
+
+  protected def runnable(input: I): O
+
+  def execute(input: I): Unit = {
     executor.submit(new Runnable {
       override def run(): Unit = {
         try {
-          val result: R = runnable()
-          notifySuccess(result)
+          val output: O = runnable(input)
+          notifySuccess(output)
         } catch {
           case e: Exception => notifyError(e)
         }
@@ -48,31 +55,25 @@ trait UseCase[R] {
     })
   }
 
-  protected def mainThreadHandler: Handler
-  protected def executor: ExecutorService
-  protected def onSuccess: R => Unit = UseCase.identityOnSuccess
-  protected def onError: Exception => Unit = UseCase.identityOnError
-  protected def runnable(): R
-
-  private def notifySuccess(result: R): Unit = {
-    mainThreadHandler.post(new Runnable() {
+  private def notifySuccess(output: O): Unit = {
+    responseHandler.post(new Runnable() {
       override def run(): Unit = {
-        onSuccess(result)
+        onSuccess match {
+          case Some(f) => f(output)
+          case None => ()
+        }
       }
     })
   }
 
   private def notifyError(error: Exception): Unit = {
-    mainThreadHandler.post(new Runnable() {
+    responseHandler.post(new Runnable() {
       override def run(): Unit = {
-        onError(error)
+        onFailure match {
+          case Some(f) => f(error)
+          case None => ()
+        }
       }
     })
   }
-}
-
-object UseCase {
-  def identityOnSuccess[R](result: R): Unit = {}
-
-  def identityOnError(error: Exception): Unit = {}
 }

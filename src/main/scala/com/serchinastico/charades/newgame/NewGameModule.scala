@@ -28,5 +28,5 @@ trait NewGameModule {
   import com.softwaremill.macwire._
 
   import usecases._
-  lazy val getPlayers = wire[GetPlayers]
+//  lazy val getPlayers = wire[GetPlayers]
 }

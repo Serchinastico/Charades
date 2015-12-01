@@ -1,6 +1,6 @@
 package com.serchinastico.charades.newgame.usecases
 
-import com.serchinastico.charades.base.usecases.{BackgroundUseCase, UseCase}
+import com.serchinastico.charades.base.usecases.BackgroundUseCase
 import com.serchinastico.charades.newgame.GetPlayers.Players
 import com.serchinastico.charades.newgame.domain.model.Player
 
@@ -28,14 +28,33 @@ import com.serchinastico.charades.newgame.domain.model.Player
  * THE SOFTWARE.
  */
 
-class GetPlayers(override val onSuccess: Players => Unit = UseCase.identityOnSuccess,
-                 override val onError: Exception => Unit = UseCase.identityOnError) extends BackgroundUseCase[Players] {
-  override protected def runnable(): Players = {
-    val players: Players = Array(new Player("https://www.google.es", "Sergio"))
-    players
+class GetPlayers(override val onSuccess: Option[Players => Unit] = None,
+                 override val onFailure: Option[Exception => Unit] = None) extends BackgroundUseCase[Unit, Players] {
+
+  override protected def runnable(input: Unit): Players = {
+    Array(new Player("https://www.google.es", "Sergio"))
   }
 }
 
 object GetPlayers {
-  def withOnSuccess(onSuccess: Players => Unit) = new GetPlayers(onSuccess = onSuccess)
+
+  class Builder() {
+    var onSuccess: Option[Players => Unit] = None
+    var onFailure: Option[Exception => Unit] = None
+
+    def withOnSuccess(onSuccess: Players => Unit): Builder = {
+      this.onSuccess = Some(onSuccess)
+      this
+    }
+
+    def withOnFailure(onFailure: Exception => Unit): Builder = {
+      this.onFailure = Some(onFailure)
+      this
+    }
+
+    def build(): GetPlayers = {
+      new GetPlayers(onSuccess, onFailure)
+    }
+  }
+
 }

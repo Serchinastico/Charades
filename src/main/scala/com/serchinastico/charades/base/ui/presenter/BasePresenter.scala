@@ -27,7 +27,7 @@ import com.serchinastico.charades.base.ui.presenter.BasePresenter.View
  */
 
 trait BasePresenter {
-  var view: View
+  val view: View
 
   def initialize(): Unit = {}
   def update(): Unit = {}

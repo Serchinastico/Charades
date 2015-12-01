@@ -1,4 +1,7 @@
-package com.serchinastico.charades.newgame.domain.model
+package com.serchinastico.charades.mainmenu.ui.presenter
+
+import com.serchinastico.charades.base.ui.presenter.BasePresenter
+import com.serchinastico.charades.mainmenu.ui.presenter.MainMenuPresenter.View
 
 /**
  * The MIT License (MIT)
@@ -24,6 +27,16 @@ package com.serchinastico.charades.newgame.domain.model
  * THE SOFTWARE.
  */
 
-class Player(val avatarImage: String,
-             val fullName: String) {
+class MainMenuPresenter(override val view: View) extends BasePresenter {
+
 }
+
+
+object MainMenuPresenter {
+
+  trait View extends BasePresenter.View {
+
+  }
+
+}
+

@@ -25,14 +25,28 @@
 package com.serchinastico.charades.mainmenu.ui.activity
 
 import android.os.Bundle
+import android.view
+import android.view.View.OnClickListener
+import android.widget.RelativeLayout
 import com.serchinastico.charades.base.ui.activity.BaseActivity
-import com.serchinastico.charades.{R, TypedFindView}
+import com.serchinastico.charades.mainmenu.ui.presenter.MainMenuPresenter
+import com.serchinastico.charades.mainmenu.ui.presenter.MainMenuPresenter.View
+import com.serchinastico.charades.newgame.ui.activity.NewGameActivity
+import com.serchinastico.charades.{R, TR, TypedFindView}
 
-class MainMenuActivity extends BaseActivity with TypedFindView {
+class MainMenuActivity extends BaseActivity with View with TypedFindView {
+
+  override val presenter: MainMenuPresenter = new MainMenuPresenter(this)
+  lazy val newGameView = findView[RelativeLayout](TR.rl_new_game)
 
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
-    setContentView(R.layout.main)
-  }
+    setContentView(R.layout.activity_main_menu)
 
+    newGameView.setOnClickListener(new OnClickListener {
+      override def onClick(v: view.View): Unit = {
+        NewGameActivity.open(MainMenuActivity.this)
+      }
+    })
+  }
 }

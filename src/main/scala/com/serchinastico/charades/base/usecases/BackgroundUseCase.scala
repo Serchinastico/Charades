@@ -1,8 +1,8 @@
 package com.serchinastico.charades.base.usecases
 
-import java.util.concurrent.{Executors, ExecutorService}
+import java.util.concurrent.{ExecutorService, Executors}
 
-import android.os.{Looper, Handler}
+import android.os.{Handler, Looper}
 
 /**
  * The MIT License (MIT)
@@ -32,9 +32,7 @@ import android.os.{Looper, Handler}
  * Base class for use cases that run in background and call callback methods in the
  * main thread.
  */
-abstract class BackgroundUseCase[R] extends UseCase[R] {
-
-  override val mainThreadHandler: Handler = new Handler(Looper.getMainLooper)
-
+abstract class BackgroundUseCase[I, O] extends UseCase[I, O] {
+  override val responseHandler: Handler = new Handler(Looper.getMainLooper)
   override val executor: ExecutorService = Executors.newCachedThreadPool()
 }

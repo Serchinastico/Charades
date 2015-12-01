@@ -53,6 +53,7 @@
       <include layout="@layout/main_horizontal_divider" />
 
       <RelativeLayout
+          android:id="@+id/rl_new_game"
           android:layout_width="match_parent"
           android:layout_height="@dimen/option_row_height">
 

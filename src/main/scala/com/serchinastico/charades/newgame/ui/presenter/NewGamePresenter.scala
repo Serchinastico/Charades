@@ -29,12 +29,12 @@ import com.serchinastico.charades.newgame.usecases.GetPlayers
  * THE SOFTWARE.
  */
 
-class NewGamePresenter(override var view: View) extends BasePresenter {
+class NewGamePresenter(override val view: View) extends BasePresenter {
   override def update(): Unit = {
     super.update()
-    GetPlayers.withOnSuccess((players: Players) => {
+    new GetPlayers.Builder().withOnSuccess((players: Players) => {
       view.showPlayers(players)
-    }).execute()
+    }).build().execute()
   }
 }
 
